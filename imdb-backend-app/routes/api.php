@@ -33,5 +33,5 @@ Route::group([
 
 });
 
-Route::get('movies', 'MovieController@index');
-Route::get('genres', 'GenreController@index');
+Route::get('movies', 'MovieController@index')->middleware('auth:api');
+Route::get('genres', 'GenreController@index')->middleware('auth:api');
