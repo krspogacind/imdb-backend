@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
-use function PHPUnit\Framework\isEmpty;
-
 class MovieController extends Controller
 {
     /**
