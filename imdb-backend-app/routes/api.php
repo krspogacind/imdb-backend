@@ -33,3 +33,5 @@ Route::group([
 
 });
 
+Route::get('movies', 'MovieController@index');
+Route::get('genres', 'GenreController@index');
