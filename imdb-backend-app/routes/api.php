@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,5 @@ Route::group([
 });
 
 Route::get('movies', 'MovieController@index');
+Route::get('movies/{id}', 'MovieController@show');
 Route::get('genres', 'GenreController@index');
