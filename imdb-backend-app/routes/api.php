@@ -35,4 +35,5 @@ Route::group([
 
 Route::get('movies', 'MovieController@index');
 Route::get('movies/{id}', 'MovieController@show');
+Route::post('movies/reaction', 'MovieReactionController@store')->middleware('auth:api');
 Route::get('genres', 'GenreController@index');
