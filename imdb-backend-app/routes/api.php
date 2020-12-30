@@ -34,4 +34,5 @@ Route::group([
 });
 
 Route::get('movies', 'MovieController@index');
+Route::get('movies/{id}', 'MovieController@show');
 Route::get('genres', 'GenreController@index');
