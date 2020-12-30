@@ -14,10 +14,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-      $movies = Movie::with('genre')->with('reactions')->get();
+      $movies = Movie::with('genre')->with('reactions')->paginate(10);
       return response()->json($movies, 200);
     }
-
     /**
      * Display the specified resource.
      *
@@ -31,5 +30,16 @@ class MovieController extends Controller
         return response()->json(['error' => "Movie with id: $id not found"], 404);
       }
       return response()->json($movie, 200);
+    }
+
+    public function searchMovies(Request $request) {
+
+        $validatedData = $request->validate([
+          'title' => 'required|string|max:255',
+        ]);
+
+        $title = $validatedData['title'];
+        $movies = Movie::with('genre')->where('title', 'LIKE', '%' . $title . '%')->paginate(10);
+        return response()->json($movies, 200);
     }
 }
