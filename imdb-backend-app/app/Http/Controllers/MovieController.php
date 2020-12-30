@@ -14,7 +14,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-      $movies = Movie::with('genre')->paginate(10);
+      $movies = Movie::with('genre')->with('reactions')->paginate(10);
       return response()->json($movies, 200);
     }
     /**
@@ -25,7 +25,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-      $movie = Movie::with('genre')->find($id);
+      $movie = Movie::with('genre')->with('reactions')->find($id);
       if (!$movie){
         return response()->json(['error' => "Movie with id: $id not found"], 404);
       }
