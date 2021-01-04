@@ -32,8 +32,8 @@ class MovieController extends Controller
       return response()->json($movie, 200);
     }
 
-    public function searchMovies(Request $request) {
-
+    public function searchMovies(Request $request) 
+    {
         $validatedData = $request->validate([
           'title' => 'required|string|max:255',
         ]);

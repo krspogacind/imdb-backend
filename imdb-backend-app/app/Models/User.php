@@ -63,4 +63,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function watchlist() 
+    {
+      return $this->hasMany('App\Models\UserWatchListItem');
+    }
 }
