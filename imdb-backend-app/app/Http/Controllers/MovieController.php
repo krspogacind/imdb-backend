@@ -39,7 +39,18 @@ class MovieController extends Controller
         ]);
 
         $title = $validatedData['title'];
-        $movies = Movie::with('genre')->where('title', 'LIKE', '%' . $title . '%')->paginate(10);
+        $movies = Movie::with('genre')->with('reactions')->where('title', 'LIKE', '%' . $title . '%')->paginate(10);
         return response()->json($movies, 200);
+    }
+
+    public function updateMovieCount($id)
+    {
+      $movie = Movie::find($id);
+      if (!$movie){
+        return response()->json(['error' => "Movie with id: $id not found"], 404);
+      }
+      $movie->view_count = $movie->view_count + 1;
+      $movie->save();
+      return response()->json($movie, 200);
     }
 }
