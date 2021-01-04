@@ -18,11 +18,9 @@ class MovieCommentController extends Controller
       $comment->movie_id = $validated['movie_id'];
       $comment->save();
 
-      $comment = MovieComment::where('id', $comment->id)->with('user')->get();
-
       return response()->json([
           'message' => 'Movie comment successfully created',
-          'comment' => $comment], 201);
+          'comment' => $comment->load('user')], 201);
     }
 
     public function getCommentsByMovieId($movieId)
