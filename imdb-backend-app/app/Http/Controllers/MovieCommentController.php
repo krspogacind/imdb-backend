@@ -25,7 +25,7 @@ class MovieCommentController extends Controller
 
     public function getCommentsByMovieId($movieId)
     {
-        $movieComments = MovieComment::where('movie_id', $movieId)->with('user')->latest()->get();
+        $movieComments = MovieComment::where('movie_id', $movieId)->with('user')->latest()->paginate(5);
         return $movieComments;
     }
 }
