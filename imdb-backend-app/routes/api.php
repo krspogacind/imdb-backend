@@ -35,6 +35,7 @@ Route::group([
 
 Route::get('movies', 'MovieController@index');
 Route::get('movies/search', 'MovieController@searchMovies');
+Route::get('movies/filter', 'MovieController@filterMovies');
 Route::get('movies/{id}', 'MovieController@show');
 Route::post('movies/reaction', 'MovieReactionController@store')->middleware('auth:api');
 Route::put('movies/{id}/views', 'MovieController@updateMovieCount')->middleware('auth:api');

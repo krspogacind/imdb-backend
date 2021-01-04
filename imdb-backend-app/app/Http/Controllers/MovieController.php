@@ -32,15 +32,15 @@ class MovieController extends Controller
       return response()->json($movie, 200);
     }
 
-    public function searchMovies(Request $request) {
+    public function searchMovies(Request $request) 
+    {
+      $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+      ]);
 
-        $validatedData = $request->validate([
-          'title' => 'required|string|max:255',
-        ]);
-
-        $title = $validatedData['title'];
-        $movies = Movie::with('genre')->with('reactions')->where('title', 'LIKE', '%' . $title . '%')->paginate(10);
-        return response()->json($movies, 200);
+      $title = $validatedData['title'];
+      $movies = Movie::with('genre')->with('reactions')->where('title', 'LIKE', '%' . $title . '%')->paginate(10);
+      return response()->json($movies, 200);
     }
 
     public function updateMovieCount($id)
@@ -52,5 +52,16 @@ class MovieController extends Controller
       $movie->view_count = $movie->view_count + 1;
       $movie->save();
       return response()->json($movie, 200);
+    }
+
+    public function filterMovies(Request $request) 
+    {
+      $validatedData = $request->validate([
+        'genre_id' => 'required|integer',
+      ]);
+
+      $genre = $validatedData['genre_id'];
+      $movies = Movie::with('genre')->with('reactions')->where('genre_id', $genre)->paginate(10);
+      return response()->json($movies, 200);
     }
 }
