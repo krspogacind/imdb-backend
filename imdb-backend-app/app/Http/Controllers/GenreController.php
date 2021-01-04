@@ -14,7 +14,7 @@ class GenreController extends Controller
      */
     public function index()
     {
-      $movies = Genre::all();
-      return response()->json($movies, 200);
+      $genres = Genre::all();
+      return response()->json($genres, 200);
     }
 }
